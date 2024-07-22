@@ -1,19 +1,29 @@
 
+import mysql from "mysql2";
 import connection from "../config/database.js";
 import Item from "../models/Items.model.js";
 
 // criaçoa do item
 export const createItem = (req, res) => {
-  const { id, name, price, manufacturing_date, expiry_date, category, quantity } =
+  const { name, price, manufacturing_date, expiry_date, category, quantity } =
     req.body;
 
-    const newItem = new Item(
+    // verificar
+    if (!name || !price || !manufacturing_date || !expiry_date || !category || !quantity) {
+        return res.status(400).json({ error: "Preencha todos os campos" });
+      }
+    
+    const isValidDate = (date) => !isNaN(Date.parse(date));
+
+    const newItem = new Item (
         name,
         price,
         manufacturing_date,
         expiry_date,
         category,
-        quantity);
+        quantity
+    );
+
     const sql = "INSERT INTO items SET ?";
 // conexao com o sql
   connection.query(sql, newItem, (err, results) => {
@@ -22,9 +32,6 @@ export const createItem = (req, res) => {
       return res.status(500).json({ error: "Erro ao inserir o item" });
     }
     res.status(201).json({ message: 'Item adicionado com sucesso', item: newItem });
-    if (!isValidDate(manufacturing_date) || !isValidDate(expiry_date)) {
-        return res.status(400).json({ error: 'Formato de data inválido' });
-      }
   })
 }
 
@@ -56,6 +63,23 @@ export const getItemById = (req, res) => {
             return res.status(404).json({ error: 'Item não encontrado' })
         }
         res.status(200).json(results[0]);
+    })
+}
+
+// pegar itens pela categoria
+export const getItemByCategory = (req, res) => {
+    const { category } = req.query
+    const sql = 'SELECT * FROM items WHERE category = ?'
+
+    connection.query(sql, [category], (err, results) => {
+        if (err) {
+            console.error('Erro ao pegar item', err);
+            return res.status(500).json({ error: 'Erro ao pegar item' })
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Item não encontrado' })
+        }
+        res.status(200).json(results);
     })
 }
 
@@ -92,6 +116,6 @@ export const deleteItem = (req, res) => {
         if (results.affectedRows === 0) {
             console.error('Item não encontrado')
         }
-        res.status(200).json({ mensage: 'Item deletado com sucesso' })
+        res.status(200).json({ message: 'Item deletado com sucesso' })
     })
 }
