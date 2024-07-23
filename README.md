@@ -2,9 +2,9 @@
 
 ## Problematização
 
-Diariamente acontece inumeras quantidades de desperdicio de alimento, este sistema visa dimunir estas quantidades oferecendo desconto à aqueles itens que estão proximos de vencer.
+Diariamente acontece inúmeras quantidades de desperdício de alimento, este sistema visa diminuir estas quantidades oferecendo desconto à aqueles itens que estão próximos de vencer.
 
-Todo o dia é feito uma ispeção para verificar a qualidade dos itens, ela se inicia as 00:00. Produtos que estiverem faltando 15 dias para seu vencimento, seu preço será automaticamente alterado para `1.99`. Como supermercados não podem vender produtos vencidos, é oferecido um super desconto nestes itens para evitar sua perda.
+Todo o dia é feito uma inspeção para verificar a qualidade dos itens, ela é realizada às 00:00. Produtos que estiverem faltando 15 dias para seu vencimento, seu preço será automaticamente alterado para `1.99`. Como supermercados não podem vender produtos vencidos, é oferecido um super desconto nestes itens para evitar sua perda.
 
 ## Descrição
 
