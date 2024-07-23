@@ -1,4 +1,3 @@
-
 import express from 'express'
 import { getAllItems, getItemByCategory, getItemById, getPromotionalItems,createItem, updateItem, deleteItem } from '../controllers/itemController.js'
 

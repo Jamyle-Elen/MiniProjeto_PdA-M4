@@ -1,4 +1,3 @@
-
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
 
@@ -10,7 +9,6 @@ const connection = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     portt: process.env.PORTT || 3306
-
 })
 
 connection.connect(err => {
