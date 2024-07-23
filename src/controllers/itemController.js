@@ -12,8 +12,6 @@ export const createItem = (req, res) => {
     if (!name || !price || !manufacturing_date || !expiry_date || !category || !quantity) {
         return res.status(400).json({ error: "Preencha todos os campos" });
       }
-    
-    const isValidDate = (date) => !isNaN(Date.parse(date));
 
     const newItem = new Item (
         name,
@@ -23,7 +21,7 @@ export const createItem = (req, res) => {
         category,
         quantity
     );
-
+   
     const sql = "INSERT INTO items SET ?";
 // conexao com o sql
   connection.query(sql, newItem, (err, results) => {

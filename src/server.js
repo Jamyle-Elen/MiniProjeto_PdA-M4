@@ -3,8 +3,9 @@ import express from 'express'
 import routes from './routes/route.js'
 import dotenv from 'dotenv'
 import connection from './config/database.js';
-// import cron from 'node-cron' //pra agendar as mudanças dde preço as 00:00
+import cron from 'node-cron' //pra agendar as mudanças dde preço as 00:00
 // import updatePrices from './'
+import checkExpiryDates from './utils/updateprices.js';
 
 dotenv.config();
 
@@ -15,5 +16,11 @@ app.use(express.json())
 app.use('/', routes)
 
 app.listen(port, () => {
-    console.log(`Running in http://localhost:${port}`)
-})
+    console.log(`Running in http://localhost:${port}`);
+    if (process.env.NODE_ENV === 'test') {
+
+        checkExpiryDates();
+    }
+});
+
+export default app;
