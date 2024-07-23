@@ -15,7 +15,7 @@ const checkExpiryDates = () => {
 };
 
 cron.schedule('0 0 * * *', () => {
-    console.log('Executando tarefa cron para verificar datas de vencimento');
+    console.log('Inspeção para verificar qualidade dos produtos...');
     checkExpiryDates();
 });
 
