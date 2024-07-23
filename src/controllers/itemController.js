@@ -64,6 +64,19 @@ export const getItemById = (req, res) => {
     })
 }
 
+// rota para itens promocionais (1.99)
+export const getPromotionalItems = (req, res) => {
+    const sql = 'SELECT * FROM items WHERE price = 1.99';
+
+    connection.query(sql, (err, results) => {
+        if (err) {
+            console.error('Erro ao pegar itens promocionais', err);
+            return res.status(500).json({ error: 'Erro ao pegar itens promocionais' });
+        }
+        res.status(200).json(results);
+    });
+};
+
 // pegar itens pela categoria
 export const getItemByCategory = (req, res) => {
     const { category } = req.query
